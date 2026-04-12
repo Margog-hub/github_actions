@@ -4,9 +4,10 @@ on:  [push]
 jobs:
   run-first-command:
     runs-on: ubuntu-latest
+    environment: "production"
     steps:
       - name: Our Vars & Secrets
         run: |
           echo '${{ vars.STATUS }}'
-          echo '${{ secrets.PASSWORT }}'
+          echo '${{ secrets.PASSWORD }}'
           
