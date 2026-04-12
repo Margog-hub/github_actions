@@ -7,7 +7,7 @@ jobs:
     steps:
       # - uses: actions/checkout@v4  
       - name: List Files
-        run: ls -a
+        run: lsyyyy -a
       
       - name: Copy Files
         run: |
