@@ -11,6 +11,11 @@ on:
       PASSWORD:
         description: "Password Description"
         required: true
+    # Передача данных обратно в вызывающий воркфлоу
+    outputs:
+      date:
+        description: "The generated date"
+        value: ${{ jobs.generate-output.outputs.date }}
 
 jobs:
   console-log:
@@ -19,18 +24,19 @@ jobs:
       - name: Print Title
         run: echo "Title is ${{ inputs.title }}"
 
-      - name: Print Password
-       
-        run: echo "Password is ${{ secrets.PASSWORD }}"
-
-      - name: Print GitHub
-        run: echo '${{ toJSON(github) }}'
+  generate-output:
+    runs-on: ubuntu-latest
+    # Объявляем выходные данные на уровне джоба
+    outputs:
+      date: ${{ steps.date-step.outputs.date }}
+    steps:
+      - name: Generate Date
+        id: date-step
+        # Записываем текущую дату в специальный файл вывода GitHub
+        run: echo "date=$(date)" >> $GITHUB_OUTPUT
 
   checkout:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        
-      - name: List files
-        run: ls -a
+      - uses: actions/checkout@v4
+      - run: ls -a
