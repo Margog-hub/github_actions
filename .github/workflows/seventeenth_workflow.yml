@@ -9,14 +9,14 @@ on:
         required: false
 
 jobs:
-  # Первая работа 
-  call-workflow:
+  # 1. Запуск файла, который лежит в ЭТОМ ЖЕ репозитории
+  local-test:
     uses: ./.github/workflows/workflow.yml
     with:
       title: ${{ inputs.title }}
 
-  # Вторая работа 
-  call-external-workflow:
-    uses: Margog-hub/workflow/.github/workflows/workflow.yml@main
+  # 2. Запуск файла из ДРУГОГО репозитория (внешнего)
+  external-test:
+    uses: Margog-hub/github_actions/.github/workflows/workflow.yml@main
     secrets:
       PASSWORD: ${{ secrets.PASSWORD }}
