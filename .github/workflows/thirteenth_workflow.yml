@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: First step
-        run: sleep 30
+        # run: sleep 30
+        run: exit 1
       - name: Runs on Canceled
         if: ${{ cancelled() }}
         run: echo "Runs on Canceled"
@@ -19,5 +20,14 @@ jobs:
         run: echo "Runs on success"
       - name: Runs on failure()
         if: ${{ failure() }}
-        run: echo "Runs on failure()"    
+        run: echo "Runs on failure()"  
+  secend-job:
+    runs-on: ubuntu-latest
+    needs: job
+    if: ${{ failure() }}
+    steps:
+      - run: echo "Job was failed"
+
+
+
          
