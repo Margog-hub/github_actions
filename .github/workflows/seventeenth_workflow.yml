@@ -9,18 +9,17 @@ on:
         required: false
 
 jobs:
-  # 1. Локальный воркфлоу 
-  local-test:
+  # 1. Вызов локального файла (в этом же репозитории)
+  call-workflow:
     uses: ./.github/workflows/workflow.yml
     with:
       title: ${{ inputs.title }}
-    secrets: inherit
-      # PASSWORD: ${{ secrets.PASSWORD }} 
+    secrets:
+      PASSWORD: ${{ secrets.PASSWORD }}
 
-  # 2. Внешний воркфлоу
-  external-test:
+  # 2. Вызов внешнего файла (в другом репозитории)
+  call-external-workflow:
+  
     uses: Margog-hub/github_actions/.github/workflows/workflow.yml@main
-    with:
-      title: ${{ inputs.title }}
     secrets:
       PASSWORD: ${{ secrets.PASSWORD }}
