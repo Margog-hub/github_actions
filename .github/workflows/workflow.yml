@@ -9,12 +9,48 @@ on:
         required: false
     secrets:
       PASSWORD:
-        required: true    
+        description: "Password Description"
+        required: true
 
 jobs:
   console-log:
     runs-on: ubuntu-latest
     steps:
       - name: Print Title
-        run: echo '${{ inputs.title }}'
+        run: echo "Title is ${{ inputs.title }}"
+
+      - name: Print Password
+        # GitHub скроет это значение в логах как ***
+        run: echo "Password is ${{ secrets.PASSWORD }}"
+
+      - name: Print GitHub Context
+        run: echo '${{ toJSON(github) }}'
+
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: List files
+        run: ls -a
+# name: Reusable Workflow
+# on:
+#   workflow_call:
+#     inputs:
+#       title:
+#         description: "Custom Title"
+#         type: string
+#         default: "Testing text title"
+#         required: false
+#     secrets:
+#       PASSWORD:
+#         required: true    
+
+# jobs:
+#   console-log:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Print Title
+#         run: echo '${{ inputs.title }}'
         
