@@ -6,9 +6,9 @@ jobs:
   job: 
     runs-on: ubuntu-latest
     steps:
-      - name: First step
+      # - name: First step
         # run: sleep 30
-        run: exit 1
+        # run: exit 1
       - name: Runs on Canceled
         if: ${{ cancelled() }}
         run: echo "Runs on Canceled"
