@@ -9,14 +9,18 @@ on:
         required: false
 
 jobs:
-  # 1. Запуск файла, который лежит в ЭТОМ ЖЕ репозитории
+  # 1. Локальный воркфлоу 
   local-test:
     uses: ./.github/workflows/workflow.yml
     with:
       title: ${{ inputs.title }}
+    secrets: inherit
+      # PASSWORD: ${{ secrets.PASSWORD }} 
 
-  # 2. Запуск файла из ДРУГОГО репозитория (внешнего)
+  # 2. Внешний воркфлоу
   external-test:
     uses: Margog-hub/github_actions/.github/workflows/workflow.yml@main
+    with:
+      title: ${{ inputs.title }}
     secrets:
       PASSWORD: ${{ secrets.PASSWORD }}
