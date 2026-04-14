@@ -9,14 +9,14 @@ on:
         required: false
 
 jobs:
-  # Вызов локального воркфлоу
+  # Первая работа 
   call-workflow:
     uses: ./.github/workflows/workflow.yml
     with:
       title: ${{ inputs.title }}
 
-  # Вызов внешнего воркфлоу из другого репозитория
+  # Вторая работа 
   call-external-workflow:
     uses: Margog-hub/workflow/.github/workflows/workflow.yml@main
-    # secrets:
-    #   PASSWORD: ${{ secrets.PASSWORD }}
+    secrets:
+      PASSWORD: ${{ secrets.PASSWORD }}
