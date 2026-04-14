@@ -1,0 +1,23 @@
+name: Thirteenth worflow
+on: push
+
+jobs:
+  # failure() success() always() cancelled()
+  job: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: First step
+        run: sleep 30
+      - name: Runs on Canceled
+        if: ${{ cancelled() }}
+        run: echo "Runs on Canceled"
+      - name: Runs on any case
+        if: ${{ always() }}
+        run: echo "Runs on success"
+      - name: Runs on success
+        if: ${{ success() }}
+        run: echo "Runs on success"
+      - name: Runs on failure()
+        if: ${{ failure() }}
+        run: echo "Runs on failure()"    
+         
