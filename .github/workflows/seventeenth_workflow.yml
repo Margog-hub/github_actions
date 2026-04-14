@@ -17,6 +17,6 @@ jobs:
 
   # Вызов внешнего воркфлоу из другого репозитория
   call-external-workflow:
-    uses: Margog-hub/workflows/.github/workflows/workflow.yml@main
+    uses: Margog-hub/workflow/.github/workflows/workflow.yml@main
     secrets:
       PASSWORD: ${{ secrets.PASSWORD }}
